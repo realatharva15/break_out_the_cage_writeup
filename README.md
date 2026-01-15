@@ -20,7 +20,7 @@ PORT   STATE SERVICE
 lets start enumerating the webpage at the port 80 to find out some hints or new leads. after some manual enumeration, we find nothing interesting on the website, no html comments and no robots.txt. so we carry out a gobuster directory scan which might reveal some interesting directories.
 
 ```bash
-gobuster dir -u http://10.81.129.42 -w /usr/share/wordlists/dirb/common.txt
+gobuster dir -u http://<target_ip> -w /usr/share/wordlists/dirb/common.txt
 ```
 we get the results as follows:
 
@@ -30,15 +30,15 @@ we get the results as follows:
 
 /.htpasswd            (Status: 403) [Size: 277]
 
-/contracts            (Status: 301) [Size: 316] [--> http://10.81.129.42/contracts/]                                                            
+/contracts            (Status: 301) [Size: 316]                                                            
 
-/html                 (Status: 301) [Size: 311] [--> http://10.81.129.42/html/]                                                                 
+/html                 (Status: 301) [Size: 311]                                                                
 
-/images               (Status: 301) [Size: 313] [--> http://10.81.129.42/images/]                                                               
+/images               (Status: 301) [Size: 313] 
 
 /index.html           (Status: 200) [Size: 2453]
 
-/scripts              (Status: 301) [Size: 314] [--> http://10.81.129.42/scripts/]                                                              
+/scripts              (Status: 301) [Size: 314]                                                              
 
 /server-status        (Status: 403) [Size: 277]
 
