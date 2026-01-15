@@ -25,13 +25,21 @@ gobuster dir -u http://10.81.129.42 -w /usr/share/wordlists/dirb/common.txt
 we get the results as follows:
 
 /.htaccess            (Status: 403) [Size: 277]
+
 /.hta                 (Status: 403) [Size: 277]
+
 /.htpasswd            (Status: 403) [Size: 277]
+
 /contracts            (Status: 301) [Size: 316] [--> http://10.81.129.42/contracts/]                                                            
+
 /html                 (Status: 301) [Size: 311] [--> http://10.81.129.42/html/]                                                                 
+
 /images               (Status: 301) [Size: 313] [--> http://10.81.129.42/images/]                                                               
+
 /index.html           (Status: 200) [Size: 2453]
+
 /scripts              (Status: 301) [Size: 314] [--> http://10.81.129.42/scripts/]                                                              
+
 /server-status        (Status: 403) [Size: 277]
 
 lets access the directories manually one by one. after some enumeration, none of them are of any use. lets enumerate the ftp port at port 21.
@@ -46,15 +54,16 @@ now we can find one file named dad_tasks. lets download this file onto our attac
 ```bash
 get dad_tasks
 ```
-
-now we see that the file contains some base64 encoded data. lets use cyber chef to decode it. after decoding the base64 encoded data, the output is still giberrish. it is probably some kind of cipher since the characters seem like they have been either shifted or replaced entirely. lets use this website !(cipher identifier)[https://www.boxentriq.com/code-breaking/cipher-identifier] to identify the type of cipher this is. turns out it is a Vigenere Cipher! lets use the Viginere Cipher decoder !(viginere_decode)[] 
+# Phase 2 - Initial Foothold:
+now we see that the file contains some base64 encoded data. lets use cyber chef to decode it. after decoding the base64 encoded data, the output is still giberrish. it is probably some kind of cipher since the characters seem like they have been either shifted or replaced entirely. lets use this website ![cipher_identifier](https://www.boxentriq.com/code-breaking/cipher-identifier) to identify the type of cipher this is. turns out it is a Vigenere Cipher! lets use the Viginere Cipher decoder ![viginere_decoder][https://www.boxentriq.com/code-breaking/vigenere-cipher] 
 since we have no idea about the KEY, we will use the automatic tool to find out the KEY. after some time we can see that the key is NAMELESSTWO
-
-
+![image1](https://github.com/realatharva15/break_out_the_cage_writeup/blob/main/images/Screenshot%202026-01-15%20at%2018-10-23%20Vigenere%20Cipher%20Boxentriq.png)
 we use the manual decrypter on the same website to get the full decrypted output. 
-
+![image2](https://github.com/realatharva15/break_out_the_cage_writeup/blob/main/images/Screenshot%202026-01-15%20at%2018-12-43%20Vigenere%20Cipher%20Boxentriq.png)
 seems like we have the answer to the question no. 1. lets see if we can access the ssh shell or not
 
+NOTE: The automatic KEY guesser for the viginere cipher is an unintended way which i found out after reading different writeups on this ctf. If you want to follow the intended path then you will have to use audacity to find the hidden KEY inside the mp3 file in the form of text string. the mp3 file will be present at the /auditions directory. since i used a smaller wordlist for the directory fuzzing i could not get /auditons in my gobuster output which led me to using an automatic KEY identifier
+# Shell as weston:
 ```bash
 ssh weston@<target_ip>
 ```
@@ -85,6 +94,7 @@ wall ilovenicholascage; /bin/bash
 
 this is a huge vulnerability. lets craft a reverse shell and get a shell as cage
 
+# Shell as cage:
 ```bash
 #lets create a malicous reverseshell script inside /tmp
 cat > /tmp/shell.sh <<  'EOF'
@@ -183,8 +193,9 @@ Regards
 
 The Legend - Cage
 ```
+# Phase 3 - Privilege Esacation:
 we find a common word among the three emails which is "face". a lot of emphasis is given on this word. maybe this could be the key fot the viginere cipher. lets use the manual decrypter for getting the final output. 
-
+![image3](https://github.com/realatharva15/break_out_the_cage_writeup/blob/main/images/Screenshot%202026-01-15%20at%2022-09-03%20Vigenere%20Cipher%20Boxentriq.png)
 BINGO!!! we get a hit with the key as "face". now this looks like a password. since there is no more higher user than cage, this must belong to root user since we find a conversation of cage mentioning Sean's username as root in the 2nd email
 
 ```bash
