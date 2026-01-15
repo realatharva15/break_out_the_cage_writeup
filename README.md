@@ -204,5 +204,5 @@ BINGO!!! we get a hit with the key as "face". now this looks like a password. si
 su root
 #enter the decrypted password when prompted
 ```
-and there we go, we have finally solved this hell of a CTF!!! Kudos to the creator of this amazing CTF. i wouldn't say that it is an Easy ctf, it definitely falls in the category of a Medium ctf considering the slick problem sovling skills requires here.
+and there we go, we have finally solved this hell of a CTF!!! Kudos to the creator of this amazing CTF. i wouldn't say that it is an Easy ctf, it definitely falls in the category of a Medium ctf considering the slick problem sovling skills required here.
 
