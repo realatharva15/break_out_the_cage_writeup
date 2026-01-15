@@ -55,7 +55,7 @@ now we can find one file named dad_tasks. lets download this file onto our attac
 get dad_tasks
 ```
 # Phase 2 - Initial Foothold:
-now we see that the file contains some base64 encoded data. lets use cyber chef to decode it. after decoding the base64 encoded data, the output is still giberrish. it is probably some kind of cipher since the characters seem like they have been either shifted or replaced entirely. lets use this website ![cipher_identifier](https://www.boxentriq.com/code-breaking/cipher-identifier) to identify the type of cipher this is. turns out it is a Vigenere Cipher! lets use the Viginere Cipher decoder ![viginere_decoder][https://www.boxentriq.com/code-breaking/vigenere-cipher] 
+now we see that the file contains some base64 encoded data. lets use cyber chef to decode it. after decoding the base64 encoded data, the output is still giberrish. it is probably some kind of cipher since the characters seem like they have been either shifted or replaced entirely. lets use this website ![cipher_identifier](https://www.boxentriq.com/code-breaking/cipher-identifier) to identify the type of cipher this is. turns out it is a Vigenere Cipher! lets use the Viginere Cipher decoder ![viginere_decoder](https://www.boxentriq.com/code-breaking/vigenere-cipher) 
 since we have no idea about the KEY, we will use the automatic tool to find out the KEY. after some time we can see that the key is NAMELESSTWO
 ![image1](https://github.com/realatharva15/break_out_the_cage_writeup/blob/main/images/Screenshot%202026-01-15%20at%2018-10-23%20Vigenere%20Cipher%20Boxentriq.png)
 we use the manual decrypter on the same website to get the full decrypted output. 
