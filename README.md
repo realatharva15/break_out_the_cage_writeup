@@ -195,7 +195,7 @@ Regards
 
 The Legend - Cage
 ```
-# Phase 3 - Privilege Esacation:
+# Phase 3 - Privilege Escalation:
 we find out that Sean has been obsessed with cage's face, in the 3rd email which is an obvious hint. a lot of emphasis is given on this word. maybe this could be the key for the viginere cipher. lets use the manual decrypter for getting the final output. 
 ![image3](https://github.com/realatharva15/break_out_the_cage_writeup/blob/main/images/Screenshot%202026-01-15%20at%2022-09-03%20Vigenere%20Cipher%20Boxentriq.png)
 BINGO!!! we get a hit with the key as "face". now this looks like a password. since there is no more higher user than cage, this must belong to root user since we find a conversation of cage mentioning Sean's username as root in the 2nd email
