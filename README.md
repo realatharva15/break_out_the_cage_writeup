@@ -1,8 +1,8 @@
 # Try Hack Me - Break Out The Cage
 # Author: Atharva Bordavekar
 # Difficulty: Easy
-# Points:
-# Vulnerabilities:
+# Points: 90
+# Vulnerabilities: Lack of sanitization in script, weak file permissions
 
 # Phase 1 - Reconnaissance:
 nmap scan:
